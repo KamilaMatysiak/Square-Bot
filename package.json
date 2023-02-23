@@ -1,0 +1,18 @@
+{
+  "name": "welcomebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.0",
+    "node-fetch": "^2.6.9",
+    "nodemon": "^2.0.20"
+  }
+}
