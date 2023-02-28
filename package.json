@@ -14,5 +14,8 @@
     "dotenv": "^16.0.0",
     "node-fetch": "^2.6.9",
     "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "wrangler": "^2.11.0"
   }
 }

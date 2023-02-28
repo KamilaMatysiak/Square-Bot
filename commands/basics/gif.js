@@ -17,7 +17,7 @@ module.exports = {
         const index = Math.floor(Math.random() * result.results.length);
         await interaction.deferReply();
         await interaction.deleteReply();
-        await interaction.channel.send(`Gif from <@${interaction.user.id}>`);
+        await interaction.channel.send(`Gif from <@${interaction.user.id}>: ||${keywords}||`);
         await interaction.channel.send(result.results[index].url);
     }
 }

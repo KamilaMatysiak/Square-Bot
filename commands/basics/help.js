@@ -9,9 +9,13 @@ const exampleEmbed = new EmbedBuilder()
     .setThumbnail("attachment://yes-square.png")
 	.addFields(
 		{ name: '/send-love', value: 'Show other users some affection.' },
-		{ name: '/gif', value: 'Send a random gif.' },
-		{ name: '/pz-reset', value: 'Make me scream at admins to restart server.' },
 		{ name: '/ping-user', value: "Make me ping someone, so you don't have to." },
+		{ name: '/bonk', value: "Bonk anyone you like." },
+		{ name: '/gif', value: 'Send a random gif.' },
+		{ name: '/aww', value: 'Send a random post from r/aww' },
+		{ name: '/programming-humour', value: 'Send a random post from r/ProgrammingHumor' },
+		{ name: '/reddit', value: 'Send a random post from specific subreddit' },
+		{ name: '/pz-reset', value: 'Make me scream at admins to restart server.' },
 	)
 	.setTimestamp()
 	.setFooter({ text: 'See you soon!', iconURL: "attachment://yes-square.png"});

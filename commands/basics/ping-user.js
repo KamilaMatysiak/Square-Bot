@@ -3,12 +3,14 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping-user')
-        .setDescription("I will *pong* you fro that!")
-        .addStringOption(option => 
-            option.setName("who")
-            .setDescription("tell me who to pong")
-            .setRequired(true)),
+        .setDescription("I will *pong* who do you want!")
+        .addUserOption(option => 
+            option
+				.setName('person')
+				.setDescription('Pick a person')
+				.setRequired(true)),
     async execute(interaction) {
-        await interaction.reply(interaction.options.getString('who') ? `Pong you ${interaction.options.getString('who')}.` : '... pong who?');
+        const user = interaction.options.getUser('person');
+        await interaction.reply(`Pong you, ${user}.`);
     }
 }

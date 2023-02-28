@@ -37,6 +37,12 @@ client.on(Events.InteractionCreate, async interaction => {
     client.channels.cache.get('1074458483908415538').send('@here - Server restart request!');
   }
 
+  if(interaction.commandName == "warn" && interaction.member._roles.find(r => r === '894912762617135134')) {
+    const user = interaction.options.getUser('target');
+    const reason = interaction.options.getString('reason');
+    client.channels.cache.get('1079886058466054254').send(`${user} got warned, because of ${reason}`)
+  }
+
   try {
     await command.execute(interaction);
   } catch(error) {
