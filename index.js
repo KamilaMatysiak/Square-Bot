@@ -1,8 +1,17 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Events, GatewayIntentBits, Collection} = require('discord.js');
+const { Client, Events, GatewayIntentBits, Collection, Partials } = require('discord.js');
+
 require("dotenv").config()
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  partials: [Partials.Message, Partials.Reaction],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessageReactions,
+  ],
+});
 
 client.commands = new Collection();
   
@@ -24,7 +33,20 @@ client.once(Events.ClientReady, c => {
   console.log(`Ready! ${c.user.tag}`);  
 })
 
+client.on('messageCreate', async (message) => {
+  if(message.author.id === '951946788766638160') return;
+  if(message.content.toLowerCase().split(' ').includes("square") || message.content.toLowerCase().split(' ').includes("squarebot")) {
+      message.reply(`It's me!`)
+    }
+
+  if(message.content.toLocaleLowerCase().includes("damage calculator")) {
+    message.reply(`Maybe you need <@1068214629286809722>?`);
+  }
+ });
+
+
 client.on(Events.InteractionCreate, async interaction => {
+
   if (!interaction.isChatInputCommand()) return;
   const command = interaction.client.commands.get(interaction.commandName);
 
