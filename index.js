@@ -17,16 +17,16 @@ const client = new Client({
 client.commands = new Collection();
   
 //get commands form files
-const commandsPath = path.join(__dirname, 'commands/basics');
-const commandsFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
-for (const file of commandsFiles) {
-  const filePath = path.join(commandsPath, file);
-  const command = require(filePath)
-  if('data' in command && 'execute' in command) {
-    client.commands.set(command.data.name, command);
-  } else {
-    console.log(`[WARNING] Command ${filePath} doesnt have 'data' or 'execute' property.`)
+const commandFolders = fs.readdirSync('./commands/');
+for(const folder of commandFolders) {
+  const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+  for (const file of commandFiles) {
+    const command = require(`./commands/${folder}/${file}`)
+    if('data' in command && 'execute' in command) {
+      client.commands.set(command.data.name, command);
+    } else {
+      console.log(`[WARNING] Command ${file} doesnt have 'data' or 'execute' property.`)
+    }
   }
 }
 

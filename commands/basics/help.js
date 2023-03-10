@@ -16,6 +16,8 @@ const exampleEmbed = new EmbedBuilder()
 		{ name: '/programming-humour', value: 'Send a random post from r/ProgrammingHumor' },
 		{ name: '/reddit', value: 'Send a random post from specific subreddit' },
 		{ name: '/pz-reset', value: 'Make me scream at admins to restart server.' },
+		{ name: '/now', value: "Send a discord timestamp with current time." },
+		{ name: '/timestamp', value: "Get a discord timestamp! (Use `private` mode to easily copy the timestamp)" },
 	)
 	.setTimestamp()
 	.setFooter({ text: 'See you soon!', iconURL: "attachment://yes-square.png"});
