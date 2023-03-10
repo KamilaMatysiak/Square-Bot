@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Events, GatewayIntentBits, Collection, Partials } = require('discord.js');
+const { EmbedBuilder,AttachmentBuilder } = require('discord.js');
 
 require("dotenv").config()
 const client = new Client({
@@ -34,18 +35,72 @@ client.once(Events.ClientReady, c => {
 })
 
 client.on('messageCreate', async (message) => {
-  if(message.author.id === '951946788766638160') return;
+  if(message.author.bot) return;
   if(message.content.toLowerCase().split(' ').includes("square") || message.content.toLowerCase().split(' ').includes("squarebot")) {
       message.reply(`It's me!`)
     }
+  if(message.content.toLowerCase().includes("what") && message.content.toLowerCase().includes("square")) {
+      message.channel.send("Type ``/help`` to now what I'm capable of 👀")
+    }
+
+  if(message.content.toLowerCase().split(' ').includes("lenny")) {
+    message.reply(`( ͡° ͜ʖ ͡°)`)
+  }
 
   if(message.content.toLocaleLowerCase().includes("damage calculator")) {
     message.reply(`Maybe you need <@1068214629286809722>?`);
+  }
+
+  if(message.content.toLocaleLowerCase().includes("annoy aedile")) {
+    message.reply(`How many squares to beat aedile`);
+  }
+
+  if(message.content.toLocaleLowerCase().includes("best bot")) {
+    message.reply(`👀`);
+  }
+
+  if(message.content.toLocaleLowerCase().includes("divinity")) {
+    if(message.channel.id === '1073258493303345212') {
+      const image = new AttachmentBuilder('./yes-square.png', { name: 'yes-square.png', description: 'ugabuga'});
+      const embed = new EmbedBuilder()
+      .setColor(0x0099FF)
+      .setTitle('Hello there!')
+      .setDescription('Availability for 6.03 - 12.03')
+      .setThumbnail("attachment://yes-square.png")
+      .addFields(
+        { name: 'Monday', value: '<t:1678118400:t> - <t:1678060800:t>' },
+        { name: 'Tuesday', value:  '<t:1678107600:t> - <t:1678060800:t>'},
+        { name: 'Wednesday', value: '<t:1678118400:t> - <t:1678060800:t>' },
+        { name: 'Thursday', value: '<t:1678132800:t> - <t:1678060800:t>' },
+        { name: 'Friday', value: 'Business trip.' },
+        { name: 'Saturday', value: 'Meeting friends.' },
+        { name: 'Sunday', value: '<t:1678107600:t> - <t:1678060800:t>' },
+      )
+      .setImage("https://media.tenor.com/KfjkZqTsrdUAAAAM/divinity-original-sin2-divinty.gif")
+      .setTimestamp()
+      .setFooter({ text: 'See you soon!', iconURL: "attachment://yes-square.png"});
+      message.reply({ embeds: [embed], files: [image] });
+    }
   }
  });
 
 
 client.on(Events.InteractionCreate, async interaction => {
+  
+  if(interaction.isButton()) {
+    console.log(interaction.id);
+    console.log(interaction.customId);
+    if(interaction.customId === 'zomboid') {
+      const role = interaction.options.getRole("role");
+      if(interaction.member._roles.includes(role.id)) {
+        interaction.member.roles.remove(role.id);
+        await interaction.reply({content: `**${role.name}** role removed`, ephemeral: true});
+      } else {
+        interaction.member.roles.add(role.id);
+        await interaction.reply({content: `**${role.name}** role added`, ephemeral: true});
+      }
+    }
+  }
 
   if (!interaction.isChatInputCommand()) return;
   const command = interaction.client.commands.get(interaction.commandName);
